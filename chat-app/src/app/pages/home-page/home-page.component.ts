@@ -7,6 +7,9 @@ import { UserFriendsComponent } from "../../components/user-friends/user-friends
 import { UserGroupsComponent } from "../../components/user-groups/user-groups.component";
 import { UserFriendMessagesComponent } from "../../components/user-friend-messages/user-friend-messages.component";
 import { UserGroupMessagesComponent } from "../../components/user-group-messages/user-group-messages.component";
+import { MatDialog } from '@angular/material/dialog';
+import { LogoutDialogComponent } from '../../components/logout-dialog/logout-dialog.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home-page',
@@ -27,6 +30,11 @@ export class HomePageComponent {
   selectedSection: string = 'chats';
   selectedItem: any = null;
 
+  constructor(
+    private dialog: MatDialog,
+    private authService: AuthService
+  ){}
+
   selectSection(section: string) {
     this.selectedSection = section;
     this.selectedItem = null;
@@ -34,5 +42,19 @@ export class HomePageComponent {
 
   openItem(item: any) {
     this.selectedItem = item;
+  }
+
+  logout(event: Event): void {
+    event.preventDefault();
+
+    const dialogRef = this.dialog.open(LogoutDialogComponent);
+
+    dialogRef.afterClosed().subscribe(ok => {
+      console.log("Logout opt")        
+      console.log(ok)
+      if (ok) {
+        this.authService.logout();   
+      }
+    });
   }
 }

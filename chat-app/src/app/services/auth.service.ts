@@ -32,4 +32,8 @@ export class AuthService {
       })
     )
   }
+
+  logout(){
+    this.sessionStorageService.clear();
+  }
 }

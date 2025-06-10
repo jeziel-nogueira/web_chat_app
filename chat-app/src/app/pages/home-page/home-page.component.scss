@@ -11,10 +11,18 @@
   flex-direction: row;
   overflow: hidden;
 
-  .side-bar,
+  //.side-bar,
   .mid-bar,
   .right-bar {
     height: 100%;
+  }
+
+  .main-side-bar{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .side-bar {

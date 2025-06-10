@@ -1,40 +1,44 @@
 <div class="main-content">
-  <div class="side-bar">
-      <span (click)="selectSection('profile')"
-        [ngClass]="{'active': selectedSection === 'profile'}">
+  <div class="main-side-bar">
+    <div class="side-bar">
+      <span (click)="selectSection('profile')" [ngClass]="{'active': selectedSection === 'profile'}">
         <mat-icon aria-hidden="false" fontIcon="account_circle"></mat-icon>
       </span>
-      <span (click)="selectSection('chats')"
-        [ngClass]="{'active': selectedSection === 'chats'}">
+      <span (click)="selectSection('chats')" [ngClass]="{'active': selectedSection === 'chats'}">
         <mat-icon aria-hidden="false" fontIcon="person"></mat-icon>
       </span>
-      <span (click)="selectSection('group-chats')"
-        [ngClass]="{'active': selectedSection === 'group-chats'}">
+      <span (click)="selectSection('group-chats')" [ngClass]="{'active': selectedSection === 'group-chats'}">
         <mat-icon aria-hidden="false" fontIcon="group"></mat-icon>
       </span>
-      <span (click)="selectSection('settings')"
-        [ngClass]="{'active': selectedSection === 'settings'}">
+      <span (click)="selectSection('settings')" [ngClass]="{'active': selectedSection === 'settings'}">
         <mat-icon aria-hidden="false" fontIcon="settings"></mat-icon>
       </span>
     </div>
-    <div class="mid-bar">
-      <ng-container [ngSwitch]="selectedSection">
-        
-        <app-profile *ngSwitchCase="'profile'"></app-profile>
-        <app-user-friends *ngSwitchCase="'chats'"></app-user-friends>
-        <app-user-groups *ngSwitchCase="'group-chats'"></app-user-groups>
-        <app-settings *ngSwitchCase="'settings'"></app-settings>
-  
-      </ng-container>
+    <div class="side-bar">
+      <span (click)="logout($event)">
+        <mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>
+      </span>
     </div>
-    <div class="right-bar">
-      <ng-container [ngSwitch]="selectedSection">
-  
-        <app-profile *ngSwitchCase="'profile'"></app-profile>
-        <app-user-friend-messages *ngSwitchCase="'chats'"></app-user-friend-messages>
-        <app-user-group-messages *ngSwitchCase="'group-chats'"></app-user-group-messages>
-        <app-settings *ngSwitchCase="'settings'"></app-settings>
-  
-      </ng-container>
-    </div>
+  </div>
+
+  <div class="mid-bar">
+    <ng-container [ngSwitch]="selectedSection">
+
+      <app-profile *ngSwitchCase="'profile'"></app-profile>
+      <app-user-friends *ngSwitchCase="'chats'"></app-user-friends>
+      <app-user-groups *ngSwitchCase="'group-chats'"></app-user-groups>
+      <app-settings *ngSwitchCase="'settings'"></app-settings>
+
+    </ng-container>
+  </div>
+  <div class="right-bar">
+    <ng-container [ngSwitch]="selectedSection">
+
+      <app-profile *ngSwitchCase="'profile'"></app-profile>
+      <app-user-friend-messages *ngSwitchCase="'chats'"></app-user-friend-messages>
+      <app-user-group-messages *ngSwitchCase="'group-chats'"></app-user-group-messages>
+      <app-settings *ngSwitchCase="'settings'"></app-settings>
+
+    </ng-container>
+  </div>
 </div>

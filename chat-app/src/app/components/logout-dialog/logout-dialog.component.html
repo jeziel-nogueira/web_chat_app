@@ -1,0 +1,15 @@
+<div class="modal">
+    <h2 class="modal-title">Adicionar Amigo</h2>
+    <form (ngSubmit)="send()">
+        <div class="modal-buttons">    
+            <h2>Desaje Sair?</h2>        
+            <div class="modal-cancel" (click)="cancel()">
+                <mat-icon aria-hidden="false" fontIcon="clear" ></mat-icon>
+            </div>
+            <div class="modal-send" (click)="send()">
+                <mat-icon aria-hidden="false" fontIcon="check"></mat-icon>
+            </div>
+        </div>
+    </form>
+
+</div>
