@@ -1,0 +1,32 @@
+@import "../../../styles/variables.scss";
+
+
+.inputl-wraper {
+    margin-top: 20px;
+    color: $primary-text-color;
+    font-size: 18px;
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 0.5em;
+        background: $gray-bg;
+        border: $default-border;
+        margin-top: 5px;
+        color: $primary-text-color;
+        font-size: 18px;
+        box-shadow: $secondary-shadow;
+        outline: none;
+
+        &:-webkit-autofill {
+            -webkit-box-shadow: $secondary-shadow !important;
+            -webkit-text-fill-color: $primary-text-color !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        &:focus {
+            border: 2px solid $primary-color; // ou a cor que você quiser
+            box-shadow: 0 0 0 3px rgba($primary-color, 0.2); // efeito de glow bonito
+        }
+    }
+}

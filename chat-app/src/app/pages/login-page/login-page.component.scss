@@ -1,0 +1,29 @@
+@import "../../../styles/variables.scss";
+
+.content {
+    display: flex;
+    width: 100% !important;
+    height: 100% !important;
+    align-items: center;
+    justify-content: center;
+
+    .login {
+        padding: 25px;
+        background-color: $gray-bg;
+        border-radius: $border-radius;
+        box-shadow: $primary-shadow;
+        border: $default-border;
+        height: 800px;
+        width: 400px;
+
+        .password-recover {
+            display: flex;
+            justify-content: end;
+            margin-top: 10px;
+            font-size: 14px;
+            color: $secondary-text-color;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

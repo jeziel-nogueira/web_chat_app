@@ -1,0 +1,21 @@
+<div class="main-section">
+    <section class="logo-section">
+        <img src="https://spng.pngfind.com/pngs/s/416-4162796_google-plus-google-plus-circle-hd-png-download.png" alt="">
+        <h2>{{ page_title }}</h2>
+        <!-- Logo -->        
+    </section>
+    <section class="form-section">
+        <ng-content></ng-content>
+         
+    </section>
+    <section class="action-section">
+        <!-- Login form -->
+         <button [disabled]="disablePrimaryButton" (click)="submit()">{{ primary_btn_txt }}</button>         
+         <div class="divider">
+            <div></div>
+            <span>or</span>
+            <div></div>
+         </div>
+         <button (click)="navigate()">{{ secondary_btn_txt }}</button>
+    </section>
+</div>

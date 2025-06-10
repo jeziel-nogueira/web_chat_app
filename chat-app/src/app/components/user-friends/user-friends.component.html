@@ -1,0 +1,13 @@
+<div class="chat-list">
+  <div class="chat-top-bar">
+    <div class="caht-title">
+      Amigos
+    </div>
+    <div class="chat-add-friend" (click)="addFriendEvent($event)">
+      <mat-icon aria-hidden="false" fontIcon="more_vert"></mat-icon>
+    </div>
+  </div>
+  <div class="chat-item" *ngFor="let chat of chats" (click)="selectChat(chat)">
+    {{ chat.name }}
+  </div>
+</div>

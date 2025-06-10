@@ -1,1 +1,51 @@
-<p>register-page works!</p>
+<div class="content">
+    <div class="login">
+        <app-default-login-layout 
+          page_title="Create your account" 
+          primary_btn_txt="Register Now"
+          secondary_btn_txt="Login Now"
+          (submit)="submit()"
+          (navigate)="navigate()"
+          [disablePrimaryButton]="!signUpForm.valid"
+          >
+            
+          <form [formGroup]="signUpForm">
+            
+            <app-default-primary-input 
+                formControlName="username"
+                inputName="username"            
+                type="text"
+                placeholder="Name"
+                label="Name"
+            ></app-default-primary-input>
+    
+            <app-default-primary-input 
+                formControlName="email"
+                inputName="email"            
+                type="text"
+                placeholder="Email"
+                label="Email"
+            ></app-default-primary-input>
+      
+            <app-default-primary-input 
+                formControlName="password"
+                inputName="password"
+                formName="password"
+                type="password"
+                placeholder="******"
+                label="Password"
+            ></app-default-primary-input>
+    
+            <app-default-primary-input 
+                formControlName="passwordConfirm"
+                inputName="passwordConfirm"
+                type="password"
+                placeholder="******"            
+                label="Confirmar Senha"
+            ></app-default-primary-input>
+      
+          </form>
+      
+        </app-default-login-layout>
+      </div>  
+</div>

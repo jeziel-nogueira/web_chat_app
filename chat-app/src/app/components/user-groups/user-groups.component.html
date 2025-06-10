@@ -1,0 +1,25 @@
+<div class="chat-list">
+    <div class="chat-top-bar">
+        <div class="caht-title">
+            Grupos
+        </div>
+        <div class="chat-options" [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </div>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="createGroup($event)">
+                <mat-icon>add</mat-icon>
+                <span>Criar Grupo</span>
+            </button>
+            <button mat-menu-item (click)="searchGroup($event)">
+                <mat-icon>search</mat-icon>
+                <span>Buscar Grupo</span>
+            </button>
+        </mat-menu>
+
+    </div>
+    <div class="chat-item" *ngFor="let chat of chats" (click)="selectChat(chat)">
+        {{ chat.name }}
+    </div>
+</div>

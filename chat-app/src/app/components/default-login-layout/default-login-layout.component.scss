@@ -1,0 +1,82 @@
+@import "../../../styles/variables.scss";
+
+.main-section {    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;    
+
+    .logo-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 22px;
+
+        img {
+            height: 100px;
+            width: 100px;
+            padding-bottom: 20px;
+        }
+    }
+
+    .form-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 22px;
+    }
+
+    .action-section {
+        width: 100%;
+        margin: 22px 0;
+
+        .divider {
+            display: flex;
+            align-items: center;
+            font-size: 12x;
+            font-weight: 400;
+            gap: 15px;
+            text-transform: uppercase;
+            padding: 20px 10px 0 10px;
+            color: $primary-text-color;
+
+            div {
+                width: 100%;
+                height: 1px;
+                background-color: $primary-text-color;
+            }
+        }
+    }
+
+    h2 {
+        font-size: 32px;
+        font-weight: bold;
+        color: $primary-text-color;
+    }
+
+    button {
+        width: 100%;
+        color: green;
+        padding: 0.7em 1.7em;
+        font-size: 18px;
+        border-radius: 0.5em;
+        background: $gray-bg;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: $primary-shadow;
+        margin-top: 18px;
+        border: $default-border;
+
+        &:active {
+            box-shadow: $secondary-shadow;
+            font-weight: bold;
+        }
+
+        &:disabled{
+            opacity: 0.5;
+            cursor: default;
+        }
+    }
+}

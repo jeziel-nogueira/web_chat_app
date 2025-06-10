@@ -1,1 +1,35 @@
-<p>login-page works!</p>
+<div class="content">
+  <div class="login">
+    <app-default-login-layout 
+      page_title="Login into your account" 
+      primary_btn_txt="Login Now"
+      secondary_btn_txt="Register Now"
+      (submit)="submit()"
+      (navigate)="navigate()"
+      [disablePrimaryButton]="!loginForm.valid"
+      >
+        
+      <form [formGroup]="loginForm">
+        
+        <app-default-primary-input 
+          formControlName="email"
+          inputName="email"
+          type="text"
+          placeholder="Email"          
+          label="Email"
+        ></app-default-primary-input>
+  
+        <app-default-primary-input 
+          formControlName="password"
+          inputName="password"
+          type="password"
+          placeholder="Senha"          
+          label="Password"
+        ></app-default-primary-input>
+        <div class="password-recover">Forgot password?</div>
+  
+      </form>
+  
+    </app-default-login-layout>
+  </div>  
+</div>

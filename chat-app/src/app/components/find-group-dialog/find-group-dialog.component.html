@@ -1,0 +1,16 @@
+<div class="modal">
+    <h2 class="modal-title">Adicionar Amigo</h2>
+    <form (ngSubmit)="send()">
+        <app-default-primary-input [(ngModel)]="groupName" name="name" [label]="'Nome do Grupo'"
+            [placeholder]="'Digite o nome'" [type]="'text'"></app-default-primary-input>
+
+        <div class="modal-buttons">            
+            <div class="modal-cancel" (click)="cancel()">
+                <mat-icon aria-hidden="false" fontIcon="chevron_left" ></mat-icon>
+            </div>
+            <div class="modal-send" (click)="send()">
+                <mat-icon aria-hidden="false" fontIcon="send"></mat-icon>
+            </div>
+        </div>
+    </form>
+</div>

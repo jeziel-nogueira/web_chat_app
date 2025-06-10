@@ -1,0 +1,28 @@
+<div class="chat-window">
+    <div *ngIf="!selectedGroup" class="no-chat-selected">
+        <p>Selecione um grupo.</p>
+    </div>
+
+    <ng-container *ngIf="selectedGroup">
+        <div class="user" *ngIf="selectedGroup">
+            <h2>{{ selectedGroup.name }}</h2>
+        </div>
+
+        <div class="messages" #messagesContainer>
+            <app-message *ngFor="let msg of messages" 
+                [id]="msg.id" 
+                [senderEmail]="msg.senderEmail"
+                [senderName]="msg.senderName" 
+                [content]="msg.content" 
+                [timestamp]="msg.timestamp"
+                [localUser]="msg.senderName.toLowerCase() === localUser">
+            </app-message>
+        </div>
+
+        <div class="input-area">
+            <span>ICON</span>
+            <input type="text" #msgInput placeholder="Digite sua mensagem..." />
+            <button (click)="send(msgInput.value); msgInput.value=''">Enviar</button>
+        </div>
+    </ng-container>
+</div>
