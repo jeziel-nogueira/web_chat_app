@@ -78,14 +78,9 @@ export class UserGroupsComponent implements OnInit {
                 creatorEmail: group.creatorEmail,
               }));
             }
-
-            console.log("É array?", Array.isArray(this.chats));
-            console.log("Tipo de chats:", typeof this.chats);
           },
           error: (error: HttpErrorResponse) => {
             const message = error.error?.error || 'Erro inesperado';
-
-            this.toastService.error(message);
           }
         });
       }
