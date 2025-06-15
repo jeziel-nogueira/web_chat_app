@@ -1,1 +1,36 @@
-<p>profile works!</p>
+<div class="profile">
+    <div class="profile-user-info">
+        <span class="title">Perfil</span>
+        <br>
+        <div class="info">
+            <p class="info-title">Nome</p>
+            <span class="info-content">
+                <p>{{ userName }}</p>
+                <mat-icon class="interaction-icon" aria-hidden="false" fontIcon="mode_edit" (click)="changeNameEvent($event)"></mat-icon>
+            </span>
+        </div>
+        <br>
+        <div class="info">
+            <p class="info-title">E-mail</p>
+            <span class="info-content">
+                <p>{{ userEmail }}</p>
+                <mat-icon aria-hidden="false" fontIcon="done_all"></mat-icon>
+            </span>
+        </div>
+        <br>
+        <div class="info">
+            <p class="info-title">Senha</p>
+            <span class="info-content">
+                <p>Mudar Senha</p>
+                <mat-icon class="interaction-icon" aria-hidden="false" fontIcon="mode_edit" (click)="changePasswordEvent($event)"></mat-icon>
+            </span>
+        </div>
+    </div>
+    <div class="profile-delete">
+        <span>
+            <span>Deletar Conta</span>
+            <mat-icon aria-hidden="false" fontIcon="delete_forever"></mat-icon>
+        </span>
+        <br>
+    </div>
+</div>

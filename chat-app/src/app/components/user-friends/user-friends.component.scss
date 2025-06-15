@@ -10,6 +10,7 @@
         .caht-title {
             font-weight: 600;
             font-size: 26px;
+            color: green;
         }
 
         .chat-add-friend {
@@ -50,6 +51,9 @@
         margin: 10px;
         border: 2px solid white;
         border-radius: 5px;
+        color: gray;
+        font-weight: 500;
+        font-size: 18px;
         cursor: pointer;
     }
 

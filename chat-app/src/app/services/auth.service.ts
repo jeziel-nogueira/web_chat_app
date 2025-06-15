@@ -19,6 +19,7 @@ export class AuthService {
       tap((value) => {
         this.sessionStorageService.set("auth-token", value.token);
         this.sessionStorageService.set("userName", value.userName);
+        this.sessionStorageService.set("userEmail", value.userEmail);
       })
     )
   }
@@ -29,6 +30,7 @@ export class AuthService {
       tap((value) => {
         this.sessionStorageService.set("auth-token", value.token);
         this.sessionStorageService.set("userName", value.userName);
+        this.sessionStorageService.set("userEmail", value.userEmail);
       })
     )
   }

@@ -50,7 +50,6 @@ export class HomePageComponent {
     const dialogRef = this.dialog.open(LogoutDialogComponent);
 
     dialogRef.afterClosed().subscribe(ok => {
-      console.log("Logout opt")        
       console.log(ok)
       if (ok) {
         this.authService.logout();   

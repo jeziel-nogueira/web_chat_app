@@ -1,5 +1,10 @@
 @import "../../../styles/variables.scss";
 
+:host {
+  display: flex;
+  height: 100%;
+}
+
 .main-content {
   width: 100%;
   min-width: 800px;

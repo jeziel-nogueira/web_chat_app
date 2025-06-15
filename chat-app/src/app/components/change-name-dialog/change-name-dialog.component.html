@@ -1,0 +1,36 @@
+<div class="modal">
+    <h2 class="modal-title">Mudar Nome</h2>
+        <form [formGroup]="form" (ngSubmit)="send()">
+            <app-default-primary-input
+            formControlName="newName"
+            inputName="newName"
+            label="Digite o novo nome"
+            placeholder="Digite o nome"
+            type="text"
+            id="new-name"
+        ></app-default-primary-input>
+
+        <div class="modal-buttons">            
+            <div class="modal-cancel" (click)="cancel()">
+                <mat-icon aria-hidden="false" fontIcon="chevron_left" ></mat-icon>
+            </div>
+            <div class="modal-send" (click)="send()">
+                <mat-icon aria-hidden="false" fontIcon="send"></mat-icon>
+            </div>
+        </div>
+
+    </form>
+    <!-- <form (ngSubmit)="send()">
+        <app-default-primary-input [(ngModel)]="groupName" name="name" [label]="'Digite o Nome'"
+            [placeholder]="'Digite o nome'" [type]="'text'"></app-default-primary-input>
+
+        <div class="modal-buttons">            
+            <div class="modal-cancel" (click)="cancel()">
+                <mat-icon aria-hidden="false" fontIcon="chevron_left" ></mat-icon>
+            </div>
+            <div class="modal-send" (click)="send()">
+                <mat-icon aria-hidden="false" fontIcon="send"></mat-icon>
+            </div>
+        </div>
+    </form> -->
+</div>
