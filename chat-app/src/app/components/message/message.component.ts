@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-message',
@@ -29,6 +30,10 @@ export class MessageComponent implements OnInit {
   isEditing = false;
   editedContent = '';
 
+  constructor(private toastService: ToastrService){
+
+  }
+
   ngOnInit(): void {
     console.log(this.senderEmail)
   }
@@ -43,6 +48,9 @@ export class MessageComponent implements OnInit {
   }
 
   saveEdit(): void {
+    if(!this.editedContent.trim()){
+      this.toastService.warning('Mensagem não pode ser vazia');
+    }
     if (this.editedContent.trim() && this.editedContent !== this.content) {
       this.edit.emit({ id: this.id, newContent: this.editedContent.trim() });
     }

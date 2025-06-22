@@ -82,7 +82,10 @@ export class UserGroupMessagesComponent {
     console.log('Mensagem editada:', data);
     this.messageService.editMessage(data.id, data.newContent)
       .subscribe({
-        next:() => { this.loadMessages(); },
+        next:() => { 
+          this.loadMessages(); 
+          this.toastService.success('Mensagem atualizada');
+        },
         error:(err) =>{ this.toastService.error(err.error.error); }
       });
   }

@@ -95,7 +95,10 @@ export class UserFriendMessagesComponent implements OnInit {
     console.log('Mensagem editada:', data);
     this.messageService.updateMessage(data.id, data.newContent)
       .subscribe({
-        next: () => { this.loadMessages(); },
+        next: () => { 
+          this.loadMessages(); 
+          this.toastService.success('Mensagem atualizada');
+        },
         error: (err) => { this.toastService.error(err.error.error); }
       });
   }
