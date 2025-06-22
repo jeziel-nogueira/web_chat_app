@@ -88,7 +88,7 @@ export class GroupService {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
 
-    return this.httpClient.put<void>(`${this.apiUrl}/messages/${id}`, content, { headers });
+    return this.httpClient.put<void>(`${this.apiUrl}/messages/${id}`, {content: content}, { headers });
   }
 
   deleteMessage(msgId: string) {

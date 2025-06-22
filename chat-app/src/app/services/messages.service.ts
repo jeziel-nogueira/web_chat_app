@@ -80,7 +80,7 @@ export class MessagesService {
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
-    return this.httpClient.put<MessageModel>(`${this.apiUrl}/${messageId}`, content, { headers });
+    return this.httpClient.put<MessageModel>(`${this.apiUrl}/${messageId}`, {content: content}, { headers });
   }
 
   deleteMessage(messageId: string): Observable<void> {

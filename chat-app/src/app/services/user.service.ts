@@ -20,7 +20,7 @@ export class UserService {
     }
 
     const body = {
-      name
+      newUserName: name
     };
 
     return this.httpClient.put(`${this.apiUrl}/`, body, { headers })
@@ -40,7 +40,7 @@ export class UserService {
     }
 
     const body = {
-      pass
+      newPassword: pass
     };
 
     return this.httpClient.put<LoginResponse>(`${this.apiUrl}/change-password`, body, { headers });

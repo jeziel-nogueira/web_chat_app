@@ -74,8 +74,11 @@ export class UserFriendMessagesComponent implements OnInit {
     if (!this.selectedChat?.email || !content.trim()) return;
 
     this.messageService.sendMessage(this.selectedChat.email, content.trim())
-      .subscribe((messages) => {
-        this.messages = messages;
+      .subscribe({
+        next: () =>{
+          this.loadMessages();
+        },
+        error: (err) => { this.toastService.error(err.error.error); }
       });
   }
 
