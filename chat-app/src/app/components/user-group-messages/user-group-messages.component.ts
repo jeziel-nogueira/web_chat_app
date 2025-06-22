@@ -9,12 +9,14 @@ import { MessageComponent } from "../message/message.component";
 import { CommonModule } from '@angular/common';
 import { response } from 'express';
 import { ToastrService } from 'ngx-toastr';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-group-messages',
   imports: [
     MessageComponent,
-    CommonModule
+    CommonModule,
+    MatIcon
   ],
   templateUrl: './user-group-messages.component.html',
   styleUrl: './user-group-messages.component.scss'
@@ -91,7 +93,7 @@ export class UserGroupMessagesComponent {
       next: () => {
         this.loadMessages();
       },
-      error: (err) => { this.toastService.error(err.error.error); },
+      error: (err) => { this.toastService.warning(err.error.error); },
       complete: () => { this.toastService.success('Mensagem deletada'); }
     });
   }

@@ -22,9 +22,9 @@
         </div>
 
         <div class="input-area">
-            <span></span>
+            <mat-icon class="msg-icon" aria-hidden="false" fontIcon="comment"></mat-icon>
             <input type="text" #msgInput placeholder="Digite sua mensagem..." />
-            <button (click)="send(msgInput.value); msgInput.value=''">Enviar</button>
+            <mat-icon aria-hidden="false" fontIcon="send" (click)="send(msgInput.value); msgInput.value=''"></mat-icon>
         </div>
     </ng-container>
 </div>

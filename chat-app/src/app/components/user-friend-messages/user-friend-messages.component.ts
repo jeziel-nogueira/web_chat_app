@@ -106,7 +106,7 @@ export class UserFriendMessagesComponent implements OnInit {
       next: () => {
         this.loadMessages();
       },
-      error: (err) => { this.toastService.error(err.error.error); },
+      error: (err) => { this.toastService.warning(err.error.error); },
       complete: () => { this.toastService.success('Mensagem deletada'); }
     });
   }
