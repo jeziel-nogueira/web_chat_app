@@ -12,8 +12,7 @@ import { SelectedChatFriendService } from '../../services/selected-chat-friend.s
   selector: 'app-user-friends',
   imports: [
     CommonModule,
-    MatIcon,
-    AddFriendDialogComponent
+    MatIcon
   ],
   templateUrl: './user-friends.component.html',
   styleUrl: './user-friends.component.scss'
