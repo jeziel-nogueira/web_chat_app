@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [
     CommonModule,
     MessageComponent,
+    MatIcon
   ],
   templateUrl: './user-friend-messages.component.html',
   styleUrl: './user-friend-messages.component.scss'

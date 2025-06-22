@@ -1,3 +1,5 @@
+@import "../../../styles/variables.scss";
+
 .chat-window {
     display: flex;
     flex-direction: column;
@@ -9,15 +11,45 @@
         justify-content: center;
         align-items: center;
         font-size: 1.5rem;
-        color: #666;
+        color: $primary-text-color;
         text-align: center;
         height: 100vh;
     }
 
     .user {
-        background-color: green;
         padding: 10px 20px;
         flex-shrink: 0;
+        background-color: $icon-selected-color;
+        box-shadow: $primary-shadow;
+        color: white;
+
+        .user-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+
+            mat-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: gray;
+                font-size: 30px;
+                cursor: pointer;
+                background-color: transparent;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: $icon-hover-color;
+                    color: orangered;
+
+                    font-size: 38px;
+                }
+            }
+        }
     }
 
     .messages {
@@ -32,7 +64,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 20px;
+        padding: 20px 20px;
         flex-shrink: 0;
         background-color: #eee;
 
@@ -45,16 +77,69 @@
         }
 
         input {
-            background-color: aliceblue;
-            padding: 8px;
-            margin: 0 10px;
-            font-size: 16px;
-            width: 80%;
+            width: 70%;
+            padding: 12px;
+            border-radius: 0.5em;
+            background: $gray-bg;
+            border: $default-border;
+            margin-top: 5px;
+            color: $primary-text-color;
+            font-size: 18px;
+            box-shadow: $secondary-shadow;
+            outline: none;
+
+            &:-webkit-autofill {
+                -webkit-box-shadow: $secondary-shadow !important;
+                -webkit-text-fill-color: $primary-text-color !important;
+                transition: background-color 5000s ease-in-out 0s;
+            }
+
+            &:focus {
+                border: 2px solid $icon-hover-color;
+                box-shadow: 0 0 0 3px rgba($icon-hover-color, 0.2);
+            }
         }
 
-        button {
-            height: 50px;
-            width: 80px;
+        mat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: gray;
+            font-size: 30px;
+            cursor: pointer;
+            background-color: transparent;
+            transition: background-color 0.3s;
+            box-shadow: $secondary-shadow;
+
+            &:hover {
+                background-color: $icon-hover-color;
+                box-shadow: $primary-shadow;
+                color: white;
+
+                font-size: 38px;
+            }
+        }
+
+        .msg-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: gray;
+            font-size: 30px;
+            cursor: default;
+            background-color: $icon-hover-color;
+            box-shadow: $primary-shadow;
+
+            &:hover {
+                font-size: 30px;
+                color: gray;
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
 import { DefaultLoginLayoutComponent } from "../../components/default-login-layout/default-login-layout.component";
 import { DefaultPrimaryInputComponent } from "../../components/default-primary-input/default-primary-input.component";
-import { error } from 'console';
+
 interface loginForm {
   email: FormControl,
   password: FormControl

@@ -5,10 +5,10 @@
 
     <ng-container *ngIf="selectedChat">
         <div class="user" *ngIf="selectedChat">
-            <h2>
-                {{ selectedChat.name }}
-                <button (click)="deleteFriend(selectedChat.email)">🗑️</button>
-            </h2>
+            <div class="user-header">
+                <h2>{{ selectedChat.name }}</h2>
+                <mat-icon aria-hidden="false" fontIcon="no_accounts" (click)="deleteFriend(selectedChat.email)"></mat-icon>
+            </div>
             <h3>{{ selectedChat.email }}</h3>
         </div>
 
@@ -26,9 +26,9 @@
         </div>
 
         <div class="input-area">
-            <span>ICON</span>
+            <mat-icon class="msg-icon" aria-hidden="false" fontIcon="comment"></mat-icon>
             <input type="text" #msgInput placeholder="Digite sua mensagem..." />
-            <button (click)="send(msgInput.value); msgInput.value=''">Enviar</button>
+            <mat-icon aria-hidden="false" fontIcon="send" (click)="send(msgInput.value); msgInput.value=''"></mat-icon>
         </div>
     </ng-container>
 </div>
