@@ -1,11 +1,37 @@
 <div class="message-wrapper" [ngClass]="{ 'own': localUser, 'other': !localUser }">
   <div class="message" [ngClass]="{ 'own-message': localUser }">
     <div *ngIf="!localUser" class="sender">{{ senderName }}</div>
-    <div class="content">{{ content }}</div>
+
+    <div class="content">
+      <ng-container *ngIf="!isEditing; else editTemplate">
+        {{ content }}
+      </ng-container>
+      <ng-template #editTemplate class="content-edit">
+        <input [(ngModel)]="editedContent" class="edit-input" />
+        <span>
+          <button mat-button color="primary" (click)="saveEdit()">Salvar</button>
+          <button mat-button color="warn" (click)="cancelEdit()">Cancelar</button>
+        </span>
+      </ng-template>
+    </div>
+
     <div class="info">
       <span class="time">{{ timestamp | date:'shortTime' }}</span>
-      <span class="seen" *ngIf="seen">✔✔</span>
-      <span class="seen" *ngIf="!seen">✔</span>
+      <span class="options">
+        <button mat-icon-button [matMenuTriggerFor]="optionsMenu">
+          <mat-icon fontIcon="more_vert"></mat-icon>
+        </button>
+        <mat-menu #optionsMenu="matMenu">
+          <button mat-menu-item *ngIf="localUser" (click)="startEdit()">
+            <mat-icon fontIcon="mode_edit"></mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="deleteMessage()">
+            <mat-icon fontIcon="delete_forever"></mat-icon>
+            <span>Excluir</span>
+          </button>
+        </mat-menu>
+      </span>
     </div>
   </div>
 </div>

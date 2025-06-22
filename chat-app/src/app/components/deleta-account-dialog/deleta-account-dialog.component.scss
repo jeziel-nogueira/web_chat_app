@@ -1,0 +1,59 @@
+@import "../../../styles/variables.scss";
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    background-color: $gray-bg;
+    padding: 30px;
+    width: 400px;
+
+    .modal-title {
+        padding-bottom: 10px;
+        color: red;
+    }
+
+    .confirm-code {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        margin-bottom: 15px;
+        text-align: center;
+        color: #d9534f;
+    }
+
+    .confirm-instruction {
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: gray;
+    }
+
+    .modal-buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 15px;
+
+        mat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: gray;
+            font-size: 30px;
+            cursor: pointer;
+            background-color: transparent;
+            transition: background-color 0.3s;
+            box-shadow: $secondary-shadow;
+
+            &:hover {
+                background-color: $icon-hover-color;
+                box-shadow: $primary-shadow;
+
+                font-size: 38px;
+            }
+        }
+    }
+}

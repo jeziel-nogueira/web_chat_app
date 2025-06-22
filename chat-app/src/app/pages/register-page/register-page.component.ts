@@ -53,9 +53,9 @@ export class RegisterPageComponent {
         },
         error: (error) => {
           if (error.status === 409) {
-            this.toastService.error(error.error || "Email já registrado.");
+            this.toastService.error(error.error?.error);
           } else {
-            this.toastService.error(error.error || "Erro inesperado");
+            this.toastService.error("Erro inesperado");
           }
         }
       })

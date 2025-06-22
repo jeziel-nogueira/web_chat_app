@@ -24,6 +24,34 @@ export class GroupService {
     return this.httpClient.get<Group[]>(`${this.apiUrl}`, { headers });
   }
 
+  createGroup(groupName: string) {
+    const token = this.sessionStorageService.get("auth-token");
+
+    const headers = token
+      ? new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      : new HttpHeaders();
+
+    const body = {
+      name: groupName
+    };
+
+    return this.httpClient.post<Group[]>(`${this.apiUrl}`, body, { headers });
+  }
+
+  findGroup(groupName: string) {
+    const token = this.sessionStorageService.get("auth-token");
+
+    const headers = token
+      ? new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      : new HttpHeaders();
+
+    const body = {
+      name: groupName
+    };
+
+    return this.httpClient.post<Group[]>(`${this.apiUrl}/join`, body, { headers });
+  }
+
   getGroupMessages(groupName: string): Observable<GroupMessageModel[]> {
     const token = this.sessionStorageService.get("auth-token");
     let headers = new HttpHeaders();
@@ -34,7 +62,7 @@ export class GroupService {
     return this.httpClient.get<GroupMessageModel[]>(`${this.apiUrl}/messages/${groupName}`, { headers });
   }
 
-  sendGroupMessage(groupName: number, content: string): Observable<GroupMessageModel[]> {
+  sendGroupMessage(groupName: string, content: string): Observable<GroupMessageModel[]> {
     const token = this.sessionStorageService.get("auth-token");
     let headers = new HttpHeaders();
     if (token) {
@@ -53,31 +81,23 @@ export class GroupService {
       );
   }
 
-  createGroup(groupName: string) {
+  editMessage(id: string, content: string): Observable<void> {
     const token = this.sessionStorageService.get("auth-token");
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
 
-    const headers = token
-      ? new HttpHeaders().set('Authorization', `Bearer ${token}`)
-      : new HttpHeaders();
+    return this.httpClient.put<void>(`${this.apiUrl}/messages/${id}`, content, { headers });
+  }
 
-    const body = {
-      name: groupName
-    };
-
-    return this.httpClient.post<Group[]>(`${this.apiUrl}`, body, { headers });
-  }  
-
-  findGroup(groupName: string) {
+  deleteMessage(msgId: string) {
     const token = this.sessionStorageService.get("auth-token");
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
 
-    const headers = token
-      ? new HttpHeaders().set('Authorization', `Bearer ${token}`)
-      : new HttpHeaders();
-
-    const body = {
-      name: groupName
-    };
-
-    return this.httpClient.post<Group[]>(`${this.apiUrl}/join`, body, { headers });
-  }  
+    return this.httpClient.delete<GroupMessageModel[]>(`${this.apiUrl}/messages/${msgId}`, { headers: headers });
+  }
 }

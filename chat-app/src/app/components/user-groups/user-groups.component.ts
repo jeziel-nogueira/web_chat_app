@@ -47,7 +47,6 @@ export class UserGroupsComponent implements OnInit {
             creatorEmail: group.creatorEmail,
           }));
         }
-        console.log(this.chats);
       },
       error: (error) => {
         console.error('Erro ao carregar lista de grupos:', error);
@@ -57,7 +56,6 @@ export class UserGroupsComponent implements OnInit {
 
   selectChat(chat: any) {
     this.groupChatSelectService.selectedChat(chat);
-    console.log(chat)
   }
 
   searchGroup(event: Event): void {
@@ -65,7 +63,6 @@ export class UserGroupsComponent implements OnInit {
     const dialogRef = this.dialog.open(FindGroupDialogComponent);
     dialogRef.afterClosed().subscribe(groupName => {
       if (groupName) {
-        console.log('Buscar grupo com nome:', groupName);
         this.groupService.findGroup(groupName).subscribe({
           next: (response) => {
             if (Array.isArray(response)) {
@@ -94,7 +91,6 @@ export class UserGroupsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(groupName => {
       if (groupName) {
-        console.log('Criar grupo com nome:', groupName);
         this.groupService.createGroup(groupName).subscribe({
           next: (response) => {
             if (Array.isArray(response)) {

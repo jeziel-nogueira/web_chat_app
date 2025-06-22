@@ -7,6 +7,8 @@ import { StorageService } from '../../services/storage.service';
 import { GroupService } from '../../services/group.service';
 import { MessageComponent } from "../message/message.component";
 import { CommonModule } from '@angular/common';
+import { response } from 'express';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-group-messages',
@@ -22,26 +24,23 @@ export class UserGroupMessagesComponent {
 
   messages: GroupMessageModel[] = [];
   selectedGroup: any = null;
-  localUser: string = '';
+  userEmail: string = '';
   private newMessageSub!: Subscription;
 
   constructor(
     private selectedGroupChatService: SelectedChatGroupService,
     private messageService: GroupService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private toastService: ToastrService
   ) {
-    this.localUser = (this.storageService.get('userName') || '').trim().toLowerCase();
+    this.userEmail = (this.storageService.get('userEmail') || '').trim().toLowerCase();
   }
 
   ngOnInit(): void {
     this.selectedGroupChatService.selectedChat$.subscribe(group => {
       if (group) {
         this.selectedGroup = group;
-
-        this.messageService.getGroupMessages(group.name).subscribe((msgs) => {
-          this.messages = msgs;
-          setTimeout(() => this.scrollToBottom(), 0);
-        });
+        this.loadMessages();
       }
     });
 
@@ -50,9 +49,13 @@ export class UserGroupMessagesComponent {
         this.messages.push(newMessage);
         setTimeout(() => this.scrollToBottom(), 0);
       }
-      console.log("É array?", Array.isArray(this.messages));
-      console.log("Tipo de chats:", typeof this.messages);
-      console.log(this.messages);
+    });
+  }
+
+  loadMessages() {
+    this.messageService.getGroupMessages(this.selectedGroup.name).subscribe((msgs) => {
+      this.messages = msgs;
+      setTimeout(() => this.scrollToBottom(), 0);
     });
   }
 
@@ -71,5 +74,25 @@ export class UserGroupMessagesComponent {
       .subscribe((messages) => {
         this.messages = messages;
       });
+  }
+
+  onEditMessage(data: { id: string, newContent: string }): void {
+    console.log('Mensagem editada:', data);
+    this.messageService.editMessage(data.id, data.newContent)
+      .subscribe({
+        next:() => { this.loadMessages(); },
+        error:(err) =>{ this.toastService.error(err.error.error); }
+      });
+  }
+
+  onDeleteMessage(msgId: string): void {
+
+    this.messageService.deleteMessage(msgId).subscribe({
+      next: () => {
+        this.loadMessages();
+      },
+      error: (err) => { this.toastService.error(err.error.error); },
+      complete: () => { this.toastService.success('Mensagem deletada'); }
+    });
   }
 }

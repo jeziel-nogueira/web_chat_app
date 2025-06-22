@@ -12,29 +12,29 @@ export class MessagesService {
   private newMessageSubject = new Subject<MessageModel>();
   newMessage$ = this.newMessageSubject.asObservable();
 
-  constructor(private httpClient: HttpClient, private sessionStorageService:StorageService) { }
+  constructor(private httpClient: HttpClient, private sessionStorageService: StorageService) { }
 
   sendMessage(receiverEmail: string, content: string): Observable<MessageModel[]> {
-  const token = this.sessionStorageService.get("auth-token");
-  let headers = new HttpHeaders();
-  if (token) {
-    headers = headers.set('Authorization', `Bearer ${token}`);
+    const token = this.sessionStorageService.get("auth-token");
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+
+    const body = {
+      receiverEmail,
+      content
+    };
+
+    return this.httpClient.post<MessageModel[]>(`${this.apiUrl}/send`, body, { headers })
+      .pipe(
+        tap((messages) => {
+          if (messages && messages.length > 0) {
+            this.newMessageSubject.next(messages[messages.length - 1]);
+          }
+        })
+      );
   }
-
-  const body = {
-    receiverEmail,
-    content
-  };
-
-  return this.httpClient.post<MessageModel[]>(`${this.apiUrl}/send`, body, { headers })
-    .pipe(
-      tap((messages) => {
-        if (messages && messages.length > 0) {
-          this.newMessageSubject.next(messages[messages.length - 1]);
-        }
-      })
-    );
-}
 
 
   sendGroupMessage(senderId: number, groupId: number, content: string): Observable<MessageModel> {
@@ -57,7 +57,7 @@ export class MessagesService {
     let headers = new HttpHeaders();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
-    }
+    }    
     return this.httpClient.get<MessageModel[]>(`${this.apiUrl}/user/${userId}`, { headers });
   }
 
@@ -66,14 +66,29 @@ export class MessagesService {
   }
 
   getMessageById(messageId: number): Observable<MessageModel> {
-    return this.httpClient.get<MessageModel>(`${this.apiUrl}/${messageId}`);
+    const token = this.sessionStorageService.get("auth-token");
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return this.httpClient.get<MessageModel>(`${this.apiUrl}/${messageId},`, {headers:headers});
   }
 
-  updateMessage(messageId: number, newContent: string): Observable<MessageModel> {
-    return this.httpClient.put<MessageModel>(`${this.apiUrl}/${messageId}`, { content: newContent });
+  updateMessage(messageId: string, content: string): Observable<MessageModel> {
+    const token = this.sessionStorageService.get("auth-token");
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return this.httpClient.put<MessageModel>(`${this.apiUrl}/${messageId}`, content, { headers });
   }
 
-  deleteMessage(messageId: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.apiUrl}/${messageId}`);
+  deleteMessage(messageId: string): Observable<void> {
+    const token = this.sessionStorageService.get("auth-token");
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return this.httpClient.delete<void>(`${this.apiUrl}/${messageId}`, {headers:headers});
   }
 }

@@ -34,15 +34,22 @@ export class UserFriendsComponent implements OnInit {
 
   ngOnInit(): void {
     this.chats = [];
-    this.friendsService.getUsesrFriends().subscribe(response => {
-      if (Array.isArray(response) && response.length > 0) {
-        this.chats = response.map(friend => ({
-          name: friend.name,
-          email: friend.email
-        }))
-      };
-    }, error => {
-      console.error('Erro ao carregar lista de amigos.');
+    this.friendsService.getUsesrFriends().subscribe({
+      next: (response) => {
+        if (Array.isArray(response)) {
+          this.chats = response.map((chat:any) => ({
+            name: chat.name,
+            email: chat.email
+          }));
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao carregar lista de grupos:', error);
+      }
+    });
+
+    this.friendsService.friends$.subscribe(friends => {
+      this.chats = friends;
     });
   }
 
@@ -57,7 +64,6 @@ export class UserFriendsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(email => {
       if (email) {
-        console.log('Adicionar amigo com e-mail:', email);
         this.friendsService.addFriend(email).subscribe({
           next: (response) => {
             if (Array.isArray(response) && response.length > 0) {

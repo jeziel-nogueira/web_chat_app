@@ -5,14 +5,23 @@
 
     <ng-container *ngIf="selectedChat">
         <div class="user" *ngIf="selectedChat">
-            <h2>{{ selectedChat.name }}</h2>
+            <h2>
+                {{ selectedChat.name }}
+                <button (click)="deleteFriend(selectedChat.email)">🗑️</button>
+            </h2>
             <h3>{{ selectedChat.email }}</h3>
         </div>
 
         <div class="messages" #messagesContainer>
-            <app-message *ngFor="let msg of messages" [id]="msg.id" [senderEmail]="msg.senderEmail"
-                [senderName]="msg.senderName" [content]="msg.content" [timestamp]="msg.timestamp"
-                [localUser]="msg.senderName.toLowerCase() === localUser">
+            <app-message *ngFor="let msg of messages" 
+                [id]="msg.id" 
+                [senderEmail]="msg.senderEmail"
+                [senderName]="msg.senderName" 
+                [content]="msg.content" 
+                [timestamp]="msg.timestamp"
+                [localUser]="msg.senderEmail.trim().toLowerCase() === userEmail"
+                (edit)="onEditMessage($event)"
+                (delete)="onDeleteMessage($event)">
             </app-message>
         </div>
 

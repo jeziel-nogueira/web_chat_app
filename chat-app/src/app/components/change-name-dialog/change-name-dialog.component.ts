@@ -37,13 +37,12 @@ export class ChangeNameDialogComponent {
 
   send() {
     if (this.form.invalid){
-      console.log("Formulario invalido");
-      console.log(this.form.value);
       this.toastService.error("Nome invalido");
       return
     }
 
-    this.dialogRef.close(this.form.value);
+    const { newName } = this.form.value;
+    this.dialogRef.close(newName);
   }
 
   cancel() {
