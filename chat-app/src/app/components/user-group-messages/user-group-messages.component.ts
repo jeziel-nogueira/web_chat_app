@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { GroupMessageModel, MessageModel } from '../../types/message.types';
 import { Subscription } from 'rxjs';
 import { SelectedChatGroupService } from '../../services/selected-chat-group.service';
@@ -21,8 +21,9 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './user-group-messages.component.html',
   styleUrl: './user-group-messages.component.scss'
 })
-export class UserGroupMessagesComponent {
+export class UserGroupMessagesComponent implements OnInit, OnDestroy {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
+  private pollingInterval: any;
 
   messages: GroupMessageModel[] = [];
   selectedGroup: any = null;
@@ -52,6 +53,16 @@ export class UserGroupMessagesComponent {
         setTimeout(() => this.scrollToBottom(), 0);
       }
     });
+
+    this.pollingInterval = setInterval(() => {
+      this.loadMessages();
+    }, 5000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);
+    }
   }
 
   loadMessages() {
@@ -82,11 +93,11 @@ export class UserGroupMessagesComponent {
     console.log('Mensagem editada:', data);
     this.messageService.editMessage(data.id, data.newContent)
       .subscribe({
-        next:() => { 
-          this.loadMessages(); 
+        next: () => {
+          this.loadMessages();
           this.toastService.success('Mensagem atualizada');
         },
-        error:(err) =>{ this.toastService.error(err.error.error); }
+        error: (err) => { this.toastService.error(err.error.error); }
       });
   }
 

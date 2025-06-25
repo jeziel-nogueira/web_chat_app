@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MessageModel } from '../../types/message.types';
 import { Subscription } from 'rxjs';
 import { SelectedChatFriendService } from '../../services/selected-chat-friend.service';
@@ -20,13 +20,14 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './user-friend-messages.component.html',
   styleUrl: './user-friend-messages.component.scss'
 })
-export class UserFriendMessagesComponent implements OnInit {
+export class UserFriendMessagesComponent implements OnInit, OnDestroy{
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   @Output() friendRemoved = new EventEmitter<string>();
   messages: MessageModel[] = [];
   private newMessageSub!: Subscription;
   selectedChat: any = null;
   userEmail: string = '';
+  private pollingInterval: any;
 
   constructor(
     private selectedFriendChatService: SelectedChatFriendService,
@@ -53,6 +54,16 @@ export class UserFriendMessagesComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.scrollToBottom();
+
+    this.pollingInterval = setInterval(() => {
+      this.loadMessages();
+    }, 5000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.pollingInterval) {
+      clearInterval(this.pollingInterval);
+    }
   }
 
   private scrollToBottom(): void {
